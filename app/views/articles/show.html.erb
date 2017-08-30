@@ -1,0 +1,31 @@
+<p>
+  <h1><strong>Tytuł:</strong></h1>
+  <%= @article.title %>
+</p>
+
+<p>
+  <h2><strong>Treść:</strong></h2>
+  <%= @article.text %>
+</p>
+
+<% if @previous_article %>
+  <%=link_to "<< Previous_article", article_path(@previous_article) %>
+<% end %>
+
+<% if @next_article %>
+  <%= link_to "Next article >>", article_path(@next_article) %>
+<% end %>
+
+
+
+<h2>Comments</h2>
+<%= render @article.comments.order(created_at: :desc) %>
+
+<h2>Add comment</h2>
+<%= render "comments/form" %>
+
+<%= link_to "Back", articles_path %>
+<%= link_to "Edit", edit_article_path(@article) %>
+<%= link_to "Delete", article_path(@article),
+                      method: :delete,
+                      data: { confirm: "Are you sure?"} %>
